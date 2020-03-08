@@ -9,6 +9,7 @@ ENV APACHEDS_INSTANCE_PATH="${APACHEDS_DATA}/${APACHEDS_INSTANCE}"
 
 RUN set -x \
     && apt-get update && DEBIAN_FRONTEND=nointeractive apt-get install -y --no-install-recommends \
+       dumb-init \
        procps ;\
        rm -rf /var/lib/apt/lists/* \
     && wget -O /tmp/apacheds.deb \

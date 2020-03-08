@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/dumb-init /bin/bash
 set -e
 
 PIDFILE="${APACHEDS_INSTANCE_PATH}/run/apacheds-default.pid"
