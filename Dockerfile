@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-buster
+FROM openjdk:8-jre-slim
 
 LABEL maintainer="zsx <thinkernel@gmail.com>"
 
@@ -12,7 +12,8 @@ ENV APACHEDS_INSTANCE_PATH "${APACHEDS_DATA}/${APACHEDS_INSTANCE}"
 RUN set -x \
     && apt-get update && DEBIAN_FRONTEND=nointeractive apt-get install -y --no-install-recommends \
        dumb-init \
-       procps ;\
+       procps \
+       wget ;\
        rm -rf /var/lib/apt/lists/* \
     && wget -O /tmp/apacheds.deb \
        "http://apache.communilink.net//directory/apacheds/dist/${APACHEDS_VERSION}/apacheds-${APACHEDS_VERSION}-amd64.deb" \
