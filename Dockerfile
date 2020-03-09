@@ -19,7 +19,8 @@ RUN set -x \
     && dpkg -i /tmp/apacheds.deb \
     && rm /tmp/apacheds.deb
 
-# Create a instance volume
+# Save the default instance directory to another place as a template for bootstrap.
+# Replace the default instance directory with a soft link point to the volume location.
 RUN mv "${APACHEDS_DATA}" "${APACHEDS_TEMPLATE}" && \
     mkdir -p "${APACHEDS_VOLUME}" && \
     chown apacheds:apacheds "${APACHEDS_VOLUME}" && \
