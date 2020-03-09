@@ -3,9 +3,11 @@ FROM openjdk:8-jre-buster
 LABEL maintainer="zsx <thinkernel@gmail.com>"
 
 ENV APACHEDS_VERSION 2.0.0.AM26
-ENV APACHEDS_DATA /var/lib/apacheds-${APACHEDS_VERSION}
+ENV APACHEDS_VOLUME   /var/lib/apacheds
+ENV APACHEDS_TEMPLATE /var/lib/apacheds-template
+ENV APACHEDS_DATA     /var/lib/apacheds-${APACHEDS_VERSION}
 ENV APACHEDS_INSTANCE default
-ENV APACHEDS_INSTANCE_PATH="${APACHEDS_DATA}/${APACHEDS_INSTANCE}"
+ENV APACHEDS_INSTANCE_PATH "${APACHEDS_DATA}/${APACHEDS_INSTANCE}"
 
 RUN set -x \
     && apt-get update && DEBIAN_FRONTEND=nointeractive apt-get install -y --no-install-recommends \
@@ -18,10 +20,11 @@ RUN set -x \
     && rm /tmp/apacheds.deb
 
 # Create a instance volume
-RUN mv ${APACHEDS_DATA} /var/lib/apacheds && \
-    mkdir -p ${APACHEDS_DATA} && \
-    chown apacheds:apacheds ${APACHEDS_DATA}
-VOLUME ${APACHEDS_DATA}
+RUN mv "${APACHEDS_DATA}" "${APACHEDS_TEMPLATE}" && \
+    mkdir -p "${APACHEDS_VOLUME}" && \
+    chown apacheds:apacheds "${APACHEDS_VOLUME}" && \
+    ln -s "${APACHEDS_VOLUME}" "${APACHEDS_DATA}"
+VOLUME "${APACHEDS_VOLUME}"
 
 COPY apacheds-entrypoint.sh /
 COPY apacheds-start.sh /
