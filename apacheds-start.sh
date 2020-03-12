@@ -13,4 +13,4 @@ shutdown_apacheds() {
 }
 
 trap shutdown_apacheds SIGINT SIGTERM EXIT
-tail --pid=$(cat $PIDFILE) -f ${APACHEDS_INSTANCE_PATH}/log/wrapper.log
+tail -n 5 --pid=$(cat $PIDFILE) -f ${APACHEDS_INSTANCE_PATH}/log/wrapper.log
