@@ -24,7 +24,6 @@ RUN set -x \
 # Replace the default instance directory with a soft link point to the volume location.
 RUN mv "${APACHEDS_DATA}" "${APACHEDS_TEMPLATE}" && \
     mkdir -p "${APACHEDS_VOLUME}" && \
-    chown apacheds:apacheds "${APACHEDS_VOLUME}" && \
     ln -s "${APACHEDS_VOLUME}" "${APACHEDS_DATA}"
 VOLUME "${APACHEDS_VOLUME}"
 
