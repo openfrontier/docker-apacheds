@@ -30,6 +30,7 @@ VOLUME "${APACHEDS_VOLUME}"
 COPY apacheds-entrypoint.sh /
 COPY apacheds-start.sh /
 RUN chmod +x /apacheds*.sh
+RUN mkdir /docker-entrypoint-init.d
 
 EXPOSE 10389 10636
 
