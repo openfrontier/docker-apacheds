@@ -1,0 +1,14 @@
+dn: ads-pwdId=serviceAccount,ou=passwordPolicies,ads-interceptorId=authenticationInterceptor,ou=interceptors,ads-directoryServiceId=default,ou=config
+objectclass: top
+objectclass: ads-base
+objectclass: ads-passwordPolicy
+ads-pwdAttribute: userPassword
+ads-pwdId: serviceAccount
+ads-pwdCheckQuality: 1
+ads-pwdFailureCountInterval: 30
+ads-pwdLockout: TRUE
+ads-pwdLockoutDuration: 3600
+ads-pwdMaxFailure: 5
+ads-pwdMinLength: 5
+ads-pwdValidator: org.apache.directory.server.core.api.authn.ppolicy.DefaultPasswordValidator
+ads-enabled: TRUE
