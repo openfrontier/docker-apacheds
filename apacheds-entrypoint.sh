@@ -13,6 +13,10 @@ if [ "$1" = "/apacheds-start.sh" ]; then
           *)         echo "$0: ignoring $f" ;;
         esac
       done
+      # Disable anonymous access
+      sed -i "s#ads-dsallowanonymousaccess: TRUE#ads-dsallowanonymousaccess: FALSE#g" "${APACHEDS_INSTANCE_PATH}/conf/config.ldif"
+      # Enable access control
+      sed -i "s#ads-dsaccesscontrolenabled: FALSE#ads-dsaccesscontrolenabled: TRUE#g" "${APACHEDS_INSTANCE_PATH}/conf/config.ldif"
       chown apacheds:apacheds "${APACHEDS_INSTANCE_PATH}/conf/config.ldif"
     fi
   else
